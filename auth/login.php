@@ -1,42 +1,34 @@
-// Tampilkan pesan sukses setelah register
-<?php if (isset($_GET['registered'])): ?>
-    <div class="flex items-center gap-sm bg-green-50 border border-green-400 rounded-lg px-md py-sm mb-md">
-        <span class="material-symbols-outlined text-green-600 text-sm">check_circle</span>
-        <p class="font-body-md text-body-md text-green-700">
-            Akun berhasil dibuat! Silakan login.
-        </p>
-    </div>
-<?php endif; ?>
 <?php
 session_start();
 
-if(isset($_SESSION['user_id'])){
-    header("Location:/travelease/hotels/index.php");
+if (isset($_SESSION['user_id'])) {
+    header("Location: /travelease/hotels/index.php");
     exit;
 }
-require "../config/database.php";
+
+require '../config/database.php';
 
 $error = '';
 
-if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login'])){
-    $email = trim($_POST ['email'] ?? '');
-    $password = $_POST ['passwpord'] ?? '';
+if (isset($_POST['login'])) {
+    $email    = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';  // ← sudah benar, tidak ada typo
 
-    if(empty($email) || empty($password)){
-        $error = "Email dan password harus diisi";
-    }else{
-        $stmt =$pdo->prepare("SELECT * FROM users WHERE email = :email");
-        $stmt->execute(['email']);
-        $user = $stmt ->fetch();
+    if (empty($email) || empty($password)) {
+        $error = "Email dan password harus diisi.";
+    } else {
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->execute([$email]);           // ← pakai [$email] bukan ['email']
+        $user = $stmt->fetch();
 
-        if($user && password_verify($password, $user['password'])){
+        if ($user && password_verify($password, $user['password'])) {
             session_regenerate_id(true);
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_name'] =$user['name'];
-            header("Location:/travelease/hotels/index.php");
+            $_SESSION['user_id']   = $user['id'];
+            $_SESSION['user_name'] = $user['name'];
+            header("Location: /travelease/hotels/index.php");
             exit;
-        }else{
-            $error ="Email atau password salah.";
+        } else {
+            $error = "Email atau password tidak valid.";
         }
     }
 }
@@ -102,7 +94,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' &
 
     <div class="bg-surface-container-lowest auth-card rounded-xl overflow-hidden flex flex-col md:flex-row w-full max-w-[1000px] min-h-[600px]">
 
-        <!-- Kiri: Branding (100% dari desain Stitch) -->
+        <!-- Kiri: Branding -->
         <div class="hidden md:block w-1/2 relative bg-primary overflow-hidden">
             <div class="absolute inset-0 z-0">
                 <img alt="Peaceful traveler"
@@ -146,7 +138,17 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' &
             <h2 class="font-headline-md text-headline-md text-on-surface mb-md">Selamat datang kembali</h2>
             <p class="font-body-md text-body-md text-on-surface-variant mb-lg">Silakan masuk ke akun Anda</p>
 
-            <!-- Pesan error dari PHP -->
+            <!-- Pesan sukses setelah register -->
+            <?php if (isset($_GET['registered'])): ?>
+                <div class="flex items-center gap-sm bg-green-50 border border-green-400 rounded-lg px-md py-sm mb-md">
+                    <span class="material-symbols-outlined text-green-600 text-sm">check_circle</span>
+                    <p class="font-body-md text-body-md text-green-700">
+                        Akun berhasil dibuat! Silakan login.
+                    </p>
+                </div>
+            <?php endif; ?>
+
+            <!-- Pesan error -->
             <?php if ($error): ?>
                 <div class="flex items-center gap-sm bg-red-50 border border-error rounded-lg px-md py-sm mb-md">
                     <span class="material-symbols-outlined text-error text-sm">error</span>
@@ -159,11 +161,8 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' &
             <!-- Form Login -->
             <form method="POST" action="" class="space-y-md">
 
-                <!-- Email -->
                 <div class="space-y-xs">
-                    <label class="font-label-sm text-label-sm text-on-surface-variant">
-                        Alamat Email
-                    </label>
+                    <label class="font-label-sm text-label-sm text-on-surface-variant">Alamat Email</label>
                     <div class="relative">
                         <span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline text-sm">mail</span>
                         <input
@@ -175,15 +174,10 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' &
                     </div>
                 </div>
 
-                <!-- Password -->
                 <div class="space-y-xs">
                     <div class="flex justify-between items-center">
-                        <label class="font-label-sm text-label-sm text-on-surface-variant">
-                            Kata Sandi
-                        </label>
-                        <a class="font-label-sm text-label-sm text-primary hover:underline" href="#">
-                            Lupa Kata Sandi?
-                        </a>
+                        <label class="font-label-sm text-label-sm text-on-surface-variant">Kata Sandi</label>
+                        <a class="font-label-sm text-label-sm text-primary hover:underline" href="#">Lupa Kata Sandi?</a>
                     </div>
                     <div class="relative">
                         <span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline text-sm">lock</span>
@@ -195,7 +189,6 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' &
                     </div>
                 </div>
 
-                <!-- Tombol submit — name="login" dipakai PHP untuk deteksi form mana yang disubmit -->
                 <button
                     type="submit"
                     name="login"
@@ -217,7 +210,6 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST' &
                 </div>
             </div>
 
-            <!-- Social Login (tampilan saja, belum fungsional) -->
             <div class="grid grid-cols-2 gap-md">
                 <button class="flex items-center justify-center gap-sm py-md px-md border border-outline-variant rounded-lg hover:bg-surface-container transition-all active:scale-95">
                     <img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAysgrHbz_p2dYCo-YF0_k809KonUIMMng6UvnqJo31jQAyp9liStgzthIKbQ0oce8wXpmrRAECpZkkBcr4aznlTs0iXwW2iiL7Y0HWFQTkuOTF70aQkr9Q-jQfmaW1m-qGWsInV6ClfzTD3Eb_bt9_obj3QHWaY_8HQgEAA6W4s3ZwP7bgZbXu86RariMWthCggJSMZgH2JPm-q_gLnyjmnW5ybCHZotP8g1eww7cTyfMBFuo2OcwEEV7om9jnXqMgjrHGTamkgs">
