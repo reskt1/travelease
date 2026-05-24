@@ -129,11 +129,19 @@ function renderStars(int $count): string {
     <nav class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-20">
         <div class="font-headline-lg text-headline-lg font-bold text-primary">TravelEase</div>
         <div class="hidden md:flex items-center space-x-xl">
+<<<<<<< HEAD
             <a class="text-primary font-bold border-b-2 border-primary pb-1" href="/travelease/hotels/index.php">Hotels</a>
             <!-- <a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Flights</a>
             <a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Trains</a>
             <a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Activities</a> -->
             <a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="/travelease/booking/mybooking.php">My Bookings</a>
+=======
+            <a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="/travelease/hotels/index.php">Hotels</a>
+            <a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Flights</a>
+            <a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Trains</a>
+            <a class="text-on-surface-variant font-medium hover:text-primary transition-colors" href="#">Activities</a>
+            <a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">My Bookings</a>
+>>>>>>> 8299c72b0fe90203335945df350d7963441ad040
         </div>
         <div class="flex items-center gap-md">
             <span class="text-on-surface-variant font-medium hidden md:block">
