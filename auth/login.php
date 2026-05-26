@@ -220,7 +220,7 @@ if (isset($_POST['login'])) {
 
             <div class="grid grid-cols-2 gap-md">
                 <button class="flex items-center justify-center gap-sm py-md px-md border border-outline-variant rounded-lg hover:bg-surface-container transition-all active:scale-95">
-                    <img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAysgrHbz_p2dYCo-YF0_k809KonUIMMng6UvnqJo31jQAyp9liStgzthIKbQ0oce8wXpmrRAECpZkkBcr4aznlTs0iXwW2iiL7Y0HWFQTkuOTF70aQkr9Q-jQfmaW1m-qGWsInV6ClfzTD3Eb_bt9_obj3QHWaY_8HQgEAA6W4s3ZwP7bgZbXu86RariMWthCggJSMZgH2JPm-q_gLnyjmnW5ybCHZotP8g1eww7cTyfMBFuo2OcwEEV7om9jnXqMgjrHGTamkgs">
+                    <link rel="icon" type="image/x-png" href="../assets/hotel.png">
                     <span class="font-label-sm text-label-sm text-on-surface">Google</span>
                 </button>
                 <button class="flex items-center justify-center gap-sm py-md px-md border border-outline-variant rounded-lg hover:bg-surface-container transition-all active:scale-95">
