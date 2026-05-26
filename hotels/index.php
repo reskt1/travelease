@@ -2,6 +2,7 @@
 require '../includes/auth_check.php';
 require '../config/database.php';
 
+
 $pdo->exec("SET SESSION sql_mode = ''");
 
 $allowed_sorts = ['recommended','price_asc','star','review'];
@@ -138,6 +139,7 @@ function reviewLabel(float $score): string {
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <link rel="icon" type="image/x-png" href="../assets/hotel.png">
     <title>TravelEase - Hotel Listings</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">

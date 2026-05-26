@@ -45,6 +45,7 @@ if (isset($_POST['login'])) {
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="icon" type="image/x-png" href="../assets/hotel.png">
     <title>TravelEase | Login</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -111,7 +112,7 @@ if (isset($_POST['login'])) {
             <div class="relative z-10 p-xl h-full flex flex-col justify-between">
                 <div>
                     <h1 class="font-headline-lg text-headline-lg text-on-primary">TravelEase</h1>
-                    <p class="font-body-lg text-body-lg text-on-primary mt-sm opacity-90">Your trusted partner for seamless journeys around the globe.</p>
+                    <p class="font-body-lg text-body-lg text-on-primary mt-sm opacity-90">Mitra tepercaya Anda untuk perjalanan lancar di seluruh dunia.</p>
                 </div>
                 <div class="space-y-md">
                     <div class="flex items-center gap-md bg-white/10 backdrop-blur-md p-md rounded-lg border border-white/20">
